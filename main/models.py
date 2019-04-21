@@ -1,40 +1,30 @@
 from django.db import models
 import uuid
 
-# Create your models here.
 
-class FileStorage(models.Model):
-	# хешь сумма файла ma5
-	md5 = models.CharField(max_length=32)
-	
-	# указатель на файл
-	file = models.FileField(upload_to='%Y-week-%W')
-
-class UserTasks(models.Model):
+class UserDowndloadTasks(models.Model):
 	# Все возможные состояния обработки файла
-	NOT_EXIST = 'NE'
-	SUCCESS = 'SC'
+	DONE = 'DN'
 	FAIL = "FL"
-	IN_WORK = "WK"
+	RUNNING = "RN"
 
 	FILE_STATUS = (
-		(NOT_EXIST, 'Not exist'),
-		(SUCCESS, 'Success'),
-		(FAIL, 'Fail'),
-		(IN_WORK, 'In work'),
+		(DONE, 'done'),
+		(FAIL, 'fail'),
+		(RUNNING, 'running'),
 	)
 
 	# уникальный идентификатор задачи
 	id = models.UUIDField(primary_key=True, default=uuid.uuid4, editable=False)
 
 	# состояние обработки
-	status = models.CharField(max_length=2, choices=FILE_STATUS, default=IN_WORK)
+	status = models.CharField(max_length=2, choices=FILE_STATUS, default=RUNNING)
 
 	# email пользователя
 	email = models.CharField(max_length=100)
 
-	# указатель на файл в таблице FileStorage
-	file = models.ForeignKey(FileStorage, on_delete=models.CASCADE, default=None, blank=True, null=True) 
+	# хешь сумма файла ma5
+	md5 = models.CharField(max_length=32)
 
 	# ссылка на файл
 	url = models.TextField()

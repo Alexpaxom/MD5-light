@@ -123,3 +123,16 @@ STATIC_URL = '/static/'
 # path to media content
 MEDIA_ROOT = BASE_DIR + '/files/'
 MEDIA_ROOT_URL = '/files/'
+
+# celery
+CELERY_BROKER_URL = 'amqp://localhost'
+SIZE_CHANKS_FOR_HASHING = 4096 #Attention must be a multiple of 128!!!
+
+# smtp settings
+EMAIL_BACKEND = 'django.core.mail.backends.filebased.EmailBackend'
+EMAIL_FILE_PATH = BASE_DIR + '/mail/'
+
+# EMAIL_HOST = 'smtp.gmail.com'
+# EMAIL_HOST_USER=''
+# EMAIL_HOST_PASSWORD=''
+# EMAIL_PORT = 25
