@@ -78,6 +78,9 @@ DATABASES = {
     'default': {
         'ENGINE': 'django.db.backends.sqlite3',
         'NAME': os.path.join(BASE_DIR, 'db.sqlite3'),
+        'OPTIONS': {
+            'timeout': 180,
+        }
     }
 }
 
@@ -126,7 +129,7 @@ MEDIA_ROOT_URL = '/files/'
 
 # celery
 CELERY_BROKER_URL = 'amqp://localhost'
-SIZE_CHANKS_FOR_HASHING = 4096 #Attention must be a multiple of 128!!!
+SIZE_CHANKS_FOR_HASHING = 4096 # Attention must be a multiple of 128!!!
 
 # smtp settings
 EMAIL_BACKEND = 'django.core.mail.backends.filebased.EmailBackend'
